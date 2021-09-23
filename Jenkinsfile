@@ -13,9 +13,20 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('Deploy') {
+        stage('DeployDev') {
+            when {
+                branch 'development'
+            }
             steps {
-                echo 'Deploying....'
+                echo 'Deploying to develop....'
+            }
+        }
+        stage('DeployPROD') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Deploying to PROD....'
             }
         }
     }
