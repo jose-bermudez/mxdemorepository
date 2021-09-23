@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'apt-get install htop'
+                sh 'sudo apt-get install htop'
             }
         }
         stage('Test') {
