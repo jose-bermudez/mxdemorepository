@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'sudo apt-get install htop'
+                sh 'ls -lahtr'
             }
         }
         stage('Test') {
