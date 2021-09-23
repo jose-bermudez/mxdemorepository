@@ -5,7 +5,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'ls -lahtr'
             }
         }
         stage('Test') {
@@ -13,16 +12,15 @@ pipeline {
                 echo 'Testing..'
             }
         }
-
         stage('DeployFeature') {
             when {
-                branch pattern: "feature-\\d+", comparator: "REGEXP"
+                branch pattern: "feature-\\d+",
+                comparator: "REGEXP"
             }
             steps {
                 echo 'Deploying feature....'
             }
         }
-
         stage('DeployDev') {
             when {
                 branch 'development'
