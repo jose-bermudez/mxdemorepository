@@ -13,6 +13,16 @@ pipeline {
                 echo 'Testing..'
             }
         }
+
+        stage('DeployFeature') {
+            when {
+                branch pattern: "feature-\\d+", comparator: "REGEXP"
+            }
+            steps {
+                echo 'Deploying feature....'
+            }
+        }
+
         stage('DeployDev') {
             when {
                 branch 'development'
@@ -24,6 +34,14 @@ pipeline {
         stage('DeployPROD') {
             when {
                 branch 'main'
+            }
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "jose-bermudez"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
             }
             steps {
                 echo 'Deploying to PROD....'
